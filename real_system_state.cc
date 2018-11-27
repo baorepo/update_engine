@@ -26,7 +26,7 @@
 #include <base/time/time.h>
 #include <brillo/message_loops/message_loop.h>
 #if USE_CHROME_KIOSK_APP
-#include <chromeos/dbus/service_constants.h>
+#include "dbus_bindings/service_constants.h"
 #endif  // USE_CHROME_KIOSK_APP
 
 #include "update_engine/common/boot_control.h"

@@ -9,4 +9,5 @@
 /update_engine.dbusserver.h
 /update_engine_client
 /update_engine_unittests
+/build
 *.pyc

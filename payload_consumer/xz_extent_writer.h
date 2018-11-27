@@ -17,7 +17,7 @@
 #ifndef UPDATE_ENGINE_PAYLOAD_CONSUMER_XZ_EXTENT_WRITER_H_
 #define UPDATE_ENGINE_PAYLOAD_CONSUMER_XZ_EXTENT_WRITER_H_
 
-#include <xz.h>
+#include <xz-embedded/xz.h>
 
 #include <memory>
 #include <utility>

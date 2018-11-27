@@ -19,7 +19,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <xz.h>
+#include <xz-embedded/xz.h>
 
 #include <string>
 #include <vector>

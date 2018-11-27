@@ -25,7 +25,7 @@
 #include <base/macros.h>
 
 #include "update_engine/client_library/include/update_engine/client.h"
-#include "update_engine/dbus-proxies.h"
+#include "dbus_bindings/dbus-proxies.h"
 
 namespace update_engine {
 namespace internal {
