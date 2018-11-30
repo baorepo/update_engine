@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.7.2)
 project (update_engine)
-# set (CMAKE_C_COMPILER "clang ")
-# set (CMAKE_CXX_COMPILER "clang++")
+
+if(CMAKE_TOOLCHAIN_FILE)
+set(LIBRARY_OUTPUT_PATH_ROOT ${CMAKE_BINARY_DIR} CACHE PATH "root for library output, set this to change where android libs are compiled to")
+# get absolute path, but get_filename_component ABSOLUTE only refer with source dir, so find_file here :(
+get_filename_component(CMAKE_TOOLCHAIN_FILE_NAME ${CMAKE_TOOLCHAIN_FILE} NAME)
+find_file(CMAKE_TOOLCHAIN_FILE ${CMAKE_TOOLCHAIN_FILE_NAME} PATHS ${CMAKE_SOURCE_DIR} NO_DEFAULT_PATH)
+message(STATUS "CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
+endif()
+
 set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS}
                     -ffunction-sections \
                     -Wall \
@@ -32,7 +39,7 @@ add_definitions(-D_FILE_OFFSET_BITS=64
                 -DDUSE_CHROME_NETWORK_PROXY=1
                 -DUSE_MTD=0
                 -DUSE_OMAHA=1
-                -DUSE_SHILL=1
+                -DUSE_SHILL=0
                 -DBASE_VER=395517
                 -D_LARGEFILE_SOURCE 
                 -D_LARGEFILE64_SOURCE )
@@ -107,16 +114,16 @@ set_target_properties(payload_consumer PROPERTIES COMPILE_FLAGS "-MD" CMAKE_STAT
 
 add_library(update_engine_core STATIC
                 proto_bindings/update_engine.pb.cc
-                boot_control_chromeos.cc
+                boot_control_slinux.cc
                 certificate_checker.cc
                 common_service.cc
-                connection_manager.cc
+                connection_manager_slinux.cc
                 connection_utils.cc
                 daemon.cc
                 dbus_connection.cc
                 dbus_service.cc
-                hardware_chromeos.cc
-                image_properties_chromeos.cc
+                hardware_slinux.cc
+                image_properties_slinux.cc
                 libcurl_http_fetcher.cc
                 metrics_reporter_omaha.cc
                 metrics_utils.cc
@@ -129,7 +136,6 @@ add_library(update_engine_core STATIC
                 power_manager_chromeos.cc
                 proxy_resolver.cc
                 real_system_state.cc
-                shill_proxy.cc
                 update_attempter.cc
                 update_boot_flags_action.cc
                 update_manager/boxed_value.cc
@@ -147,7 +153,6 @@ add_library(update_engine_core STATIC
                 update_manager/real_config_provider.cc
                 update_manager/real_device_policy_provider.cc
                 update_manager/real_random_provider.cc
-                update_manager/real_shill_provider.cc
                 update_manager/real_system_provider.cc
                 update_manager/real_time_provider.cc
                 update_manager/real_updater_provider.cc
