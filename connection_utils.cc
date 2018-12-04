@@ -15,9 +15,23 @@
 //
 
 #include "update_engine/connection_utils.h"
-
+#if USE_SHILL
 #include <shill/dbus-constants.h>
+#else
+namespace shill{
+const char kTetheringNotDetectedState[] = "NotDetected";
+const char kTetheringSuspectedState[] = "Suspected";
+const char kTetheringConfirmedState[] = "Confirmed";
 
+const char kTypeEthernet[] = "ethernet";
+const char kTypeWifi[] = "wifi";
+const char kTypeWimax[] = "wimax";
+const char kTypeBluetooth[] = "bluetooth";
+const char kTypeCellular[] = "cellular";
+const char kTypeVPN[] = "vpn";
+const char kTypePPPoE[] = "pppoe";
+}
+#endif
 namespace chromeos_update_engine {
 namespace connection_utils {
 
