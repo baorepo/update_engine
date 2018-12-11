@@ -1,9 +1,12 @@
 #!/bin/sh
 root=$(cat /proc/mounts  | grep stateful_partitio | cut -b 1-12)
 tmpboot=$(mktemp -d)
-is_bootA=$(cat  /proc/mounts | grep ${root}p3)
-is_bootB=$(cat  /proc/mounts | grep ${root}p5)
+is_bootA=$(cat  /proc/mounts | grep "${root}p3 / ext4")
+is_bootB=$(cat  /proc/mounts | grep "${root}p5 / ext4")
 
+echo "print mount info"
+cat  /proc/mounts 
+echo "__________________"
 echo "run cgpt repair ${root}"
 cgpt repair ${root}
 
@@ -13,13 +16,13 @@ mount  ${root}p12 ${tmpboot}
 if [ "x${is_bootA}" != "x" ] ; then
 	echo "Currently boot from A slot"
 	echo "Copying /boot/bootB.scr to boot.scr"
-	cp /boot/bootB.scr  ${tmpboot}/boot.scr
+	cp -v /boot/bootB.scr  ${tmpboot}/boot.scr
 fi
 
 if [ "x${is_bootB}" != "x" ] ; then
 	echo "Currently boot from B slot"
 	echo "Copying /boot/bootA.scr to boot.scr"
-	cp /boot/bootA.scr  ${tmpboot}/boot.scr
+	cp -v /boot/bootA.scr  ${tmpboot}/boot.scr
 fi
 
 umount  ${tmpboot}
