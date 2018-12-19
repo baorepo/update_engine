@@ -61,7 +61,7 @@ add_library(payload_consumer STATIC
                 common/http_fetcher.cc
                 common/hwid_override.cc
                 common/multi_range_http_fetcher.cc
-                common/platform_constants_chromeos.cc
+                common/platform_constants_slinux.cc
                 common/prefs.cc
                 common/subprocess.cc
                 common/terminator.cc
