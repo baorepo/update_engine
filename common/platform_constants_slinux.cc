@@ -23,8 +23,8 @@ const char kOmahaDefaultProductionURL[] =
     "https://192.168.199.117:8080/update";
 const char kOmahaDefaultAUTestURL[] =
     "https://192.168.199.117:8080/update";
-const char kOmahaUpdaterID[] = "ChromeOSUpdateEngine";
-const char kOmahaPlatformName[] = "Chrome OS";
+const char kOmahaUpdaterID[] = "SlinuxUpdateEngine";
+const char kOmahaPlatformName[] = "Slinux OS";
 const char kUpdatePayloadPublicKeyPath[] =
     "/home/debian/playload_public_key.pem";
 const char kCACertificatesPath[] = "/home/debian/slinux-ca-certificates";
