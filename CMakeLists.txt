@@ -26,7 +26,8 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 set(LINKER_FLAGS "-Wl,--gc-sections")
 
 find_package(PkgConfig REQUIRED) 
-pkg_search_module(BASE  libbrillo-395517 libbrillo-glib-395517 libbrillo-test-395517 libchrome-395517 protobuf-lite protobuf xz-embedded curl ssl)
+pkg_check_modules(BASE  REQUIRED libbrillo-395517 libbrillo-glib-395517 libbrillo-test-395517 libchrome-395517 protobuf-lite protobuf xz-embedded )
+# pkg_search_module(BASE  libbrillo-395517 libbrillo-glib-395517 libbrillo-test-395517 libchrome-395517 protobuf-lite protobuf xz-embedded curl ssl)
 
 add_definitions(-D_FILE_OFFSET_BITS=64 
                 -DNDEBUG -D__CHROMEOS__  
@@ -279,3 +280,4 @@ target_link_libraries(delta_generator  PUBLIC
                     ${LINKER_FLAGS}
 )     
 set_target_properties(delta_generator PROPERTIES COMPILE_FLAGS "-MD" CMAKE_STATIC_LINKER_FLAGS "-pie" )
+
